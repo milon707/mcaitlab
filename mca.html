@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCA IT Lab - Web Development</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #023047;
+            --secondary: #219ebc;
+            --accent: #fb8500;
+            --light-accent: #ffb703;
+            --highlight: #8ecae6;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .skill-bar {
+            height: 10px;
+            background: linear-gradient(90deg, var(--secondary), var(--highlight));
+            border-radius: 5px;
+            transition: width 1.5s ease;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: var(--light-accent);
+        }
+        .btn-secondary {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        .btn-secondary:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        .profile-image-container {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            aspect-ratio: 1/1;
+        }
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link.active {
+            color: var(--accent);
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+            animation: underline 0.3s ease;
+        }
+        @keyframes underline {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        .logo {
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            font-size: 1.75rem;
+            background: linear-gradient(90deg, var(--accent), var(--light-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .logo span {
+            color: var(--primary);
+        }
+        .hover-border-effect {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .hover-border-effect:hover {
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white shadow-md py-3">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="logo"><span>MCA</span> IT Lab</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link" id="home-link">Home</a>
+                <a href="#about" class="nav-link" id="about-link">About</a>
+                <a href="#services" class="nav-link" id="services-link">Services</a>
+                <a href="#achievements" class="nav-link" id="achievements-link">Achievements</a>
+                <a href="#contact" class="nav-link" id="contact-link">Contact</a>
+            </div>
+            <button class="md:hidden focus:outline-none" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl" style="color: var(--primary);"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden absolute top-16 right-6 bg-white p-4 rounded-lg shadow-lg" id="mobile-menu">
+            <div class="flex flex-col space-y-4">
+                <a href="#home" class="nav-link mobile-nav" id="mobile-home-link">Home</a>
+                <a href="#about" class="nav-link mobile-nav" id="mobile-about-link">About</a>
+                <a href="#services" class="nav-link mobile-nav" id="mobile-services-link">Services</a>
+                <a href="#achievements" class="nav-link mobile-nav" id="mobile-achievements-link">Achievements</a>
+                <a href="#contact" class="nav-link mobile-nav" id="mobile-contact-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Hi, We're <span style="color: var(--accent);">MCA IT Lab</span></h1>
+                <h2 class="text-2xl md:text-3xl mb-6">Web Development Experts</h2>
+                <p class="text-lg mb-8 opacity-90">We build fast, modern, and stunning digital solutions.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#contact" class="btn-primary px-6 py-3 rounded-full font-medium transition text-center">Hire Us</a>
+                    <a href="#achievements" class="btn-secondary px-6 py-3 rounded-full font-medium transition text-center">Our Achievements</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
+                <div class="profile-image-container">
+                    <img src="milon.jpg" 
+                         alt="MCA IT Lab Team" 
+                         class="profile-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" style="color: var(--primary);" data-aos="fade-up">About Us</h2>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center" data-aos="fade-right">
+                    <div class="profile-image-container relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full opacity-20 animate-pulse"></div>
+                        <img src="milon.jpg" 
+                             alt="MCA IT Lab Team" 
+                             class="profile-image relative z-10">
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 md:pl-12" data-aos="fade-left">
+                    <p class="text-lg mb-6">We are a passionate team of web developers with 5+ years of experience creating modern, responsive websites and web applications. Our focus is on delivering high-quality, performant solutions that meet client needs.</p>
+                    <p class="text-lg mb-8">We specialize in full-stack development, offering both front-end and back-end expertise to build complete solutions from the ground up.</p>
+                    
+                    <h3 class="text-xl font-bold mb-4" style="color: var(--secondary);">Our Expertise</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="skill-item">
+                            <p class="mb-1">HTML/CSS</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="skill-bar rounded-full h-2.5" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <p class="mb-1">JavaScript</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="skill-bar rounded-full h-2.5" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <p class="mb-1">React</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="skill-bar rounded-full h-2.5" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <p class="mb-1">Node.js</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="skill-bar rounded-full h-2.5" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <p class="mb-1">PHP/Laravel</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="skill-bar rounded-full h-2.5" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <p class="mb-1">UI/UX Design</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="skill-bar rounded-full h-2.5" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" style="color: var(--primary);" data-aos="fade-up">Our Services</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--secondary);">Web Design</h3>
+                    <p class="text-gray-600">Custom, responsive websites designed with the latest technologies to ensure fast loading and great user experience.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--secondary);">E-commerce Solutions</h3>
+                    <p class="text-gray-600">Complete online store solutions with secure payment gateways, inventory management, and mobile-friendly interfaces.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--secondary);">Custom Systems</h3>
+                    <p class="text-gray-600">Tailored admin dashboards with analytics, user management, and custom functionality to streamline your operations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" style="color: var(--primary);" data-aos="fade-up">Our Achievements</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Achievement 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--secondary);">500+ Projects</h3>
+                    <p class="text-gray-600">Successfully delivered over 500 projects to satisfied clients worldwide, showcasing our expertise and reliability.</p>
+                </div>
+                
+                <!-- Achievement 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--secondary);">Global Reach</h3>
+                    <p class="text-gray-600">Served clients in 15+ countries across various industries, demonstrating our adaptability and global competence.</p>
+                </div>
+                
+                <!-- Achievement 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--secondary);">Industry Recognition</h3>
+                    <p class="text-gray-600">Awarded "Best Web Development Agency" for three consecutive years by the National IT Association.</p>
+                </div>
+                
+                <!-- Achievement 4 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--secondary);">Client Retention</h3>
+                    <p class="text-gray-600">85% of our clients return for additional services, a testament to our quality and customer satisfaction.</p>
+                </div>
+                
+                <!-- Achievement 5 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--secondary);">Innovation</h3>
+                    <p class="text-gray-600">Pioneered 10+ innovative web solutions that have become industry standards in the local market.</p>
+                </div>
+                
+                <!-- Achievement 6 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl mb-4" style="color: var(--accent);">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3" style="color: var(--secondary);">Training</h3>
+                    <p class="text-gray-600">Trained 200+ professionals through our developer workshops and certification programs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" style="color: var(--primary);" data-aos="fade-up">Client Testimonials</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">John Smith</h4>
+                            <p class="text-gray-600 text-sm">CEO, TechCorp</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"MCA IT Lab delivered our e-commerce site ahead of schedule. The site performs exceptionally well and has helped increase our sales by 30%."</p>
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Sarah Johnson</h4>
+                            <p class="text-gray-600 text-sm">Marketing Director</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"The custom admin panel MCA IT Lab built has saved us countless hours. It's intuitive, powerful, and exactly what we needed."</p>
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md hover-border-effect" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Michael Brown</h4>
+                            <p class="text-gray-600 text-sm">Founder, StartupX</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">"Working with MCA IT Lab was a pleasure. They understood our vision and delivered a product that exceeded our expectations."</p>
+                    <div class="text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16" style="color: var(--primary);" data-aos="fade-up">Get In Touch</h2>
+            
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-8" data-aos="fade-right">
+                    <h3 class="text-xl font-bold mb-4" style="color: var(--secondary);">Contact Information</h3>
+                    <p class="mb-6">Feel free to reach out to us for project inquiries or just to say hello!</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="text-xl mr-4 mt-1" style="color: var(--accent);">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Email</h4>
+                                <p class="text-gray-600">contact@mcaitlab.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-xl mr-4 mt-1" style="color: var(--accent);">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Phone</h4>
+                                <p class="text-gray-600">+1 (123) 456-7890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="text-xl mr-4 mt-1" style="color: var(--accent);">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Location</h4>
+                                <p class="text-gray-600">Dhaka, Bangladesh</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold mb-4" style="color: var(--secondary);">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-2xl hover:text-gray-600 transition" style="color: var(--highlight);">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="text-2xl hover:text-gray-600 transition" style="color: var(--highlight);">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="text-2xl hover:text-gray-600 transition" style="color: var(--highlight);">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-2xl hover:text-gray-600 transition" style="color: var(--highlight);">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2" data-aos="fade-left">
+                    <form class="bg-white p-8 rounded-xl shadow-md hover-border-effect">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-orange-500">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Your Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-orange-500">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-orange-500"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full btn-primary py-3 px-6 rounded-lg font-medium transition">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-3" style="background-color: var(--primary); color: white;">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-3 md:mb-0">
+                    <a href="#" class="text-xl font-bold text-white">MCA IT Lab</a>
+                    <p class="mt-1 text-xs opacity-80">Web Development & Design Solutions</p>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="opacity-80 hover:opacity-100 transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="opacity-80 hover:opacity-100 transition">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="opacity-80 hover:opacity-100 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="opacity-80 hover:opacity-100 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-opacity-20 mt-3 pt-3 text-center text-xs opacity-80">
+                <p>&copy; 2023 MCA IT Lab. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Highlight active navigation link
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav');
+
+        function highlightNavLink() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNavLink);
+        highlightNavLink(); // Run once on page load
+
+        // Animate skill bars on scroll
+        const animateSkillBars = () => {
+            const skillBars = document.querySelectorAll('.skill-bar');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        };
+
+        // Check if skill section is in view
+        const skillSection = document.querySelector('#about');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSkillBars();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(skillSection);
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
