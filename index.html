@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCA IT Lab | The Future of Web</title>
+    <title>MCA IT Lab | Full-Stack Development & Enterprise Solutions</title>
     
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -12,10 +12,10 @@
 
     <style>
         :root {
-            --bg-dark: #000c18; /* Deep Navy Black */
-            --primary: #008037; /* Your School Green */
-            --accent: #ff5722;  /* Your Orange */
-            --gold: #ffd700;    /* Premium Gold */
+            --bg-dark: #000c18;
+            --primary: #008037;
+            --accent: #ff5722;
+            --gold: #ffd700;
             --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
         }
@@ -29,7 +29,6 @@
 
         h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
 
-        /* Smooth Background Mesh */
         .mesh-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -38,7 +37,6 @@
             z-index: -1;
         }
 
-        /* Glassmorphism 2.0 */
         .ultra-glass {
             background: var(--glass);
             backdrop-filter: blur(20px);
@@ -47,7 +45,6 @@
             border-radius: 24px;
         }
 
-        /* Neon Glow Button */
         .btn-neon {
             background: linear-gradient(45deg, var(--primary), #00a84a);
             color: white;
@@ -60,21 +57,18 @@
             transform: translateY(-3px);
         }
 
-        /* Premium Nav */
         nav {
             background: rgba(0, 12, 24, 0.8);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--glass-border);
         }
 
-        /* Hero Text Gradient */
         .text-gradient {
             background: linear-gradient(to right, #ffffff, var(--gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* Hover Card Effect */
         .service-card {
             transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
             position: relative;
@@ -94,14 +88,12 @@
         }
         .service-card:hover::before { left: 100%; }
 
-        /* Floating Animation */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
         }
         .img-float { animation: float 5s ease-in-out infinite; }
 
-        /* Skill Circles */
         .skill-tag {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--glass-border);
@@ -111,7 +103,6 @@
             transition: 0.3s;
         }
         .skill-tag:hover { background: var(--primary); border-color: var(--primary); }
-
     </style>
 </head>
 <body>
@@ -126,7 +117,7 @@
             <div class="hidden md:flex space-x-10 items-center">
                 <a href="#home" class="text-sm uppercase tracking-widest opacity-70 hover:opacity-100 transition">Intro</a>
                 <a href="#about" class="text-sm uppercase tracking-widest opacity-70 hover:opacity-100 transition">Founder</a>
-                <a href="#services" class="text-sm uppercase tracking-widest opacity-70 hover:opacity-100 transition">Expertise</a>
+                <a href="#services" class="text-sm uppercase tracking-widest opacity-70 hover:opacity-100 transition">Tech Stack</a>
                 <a href="#contact" class="btn-neon px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Connect</a>
             </div>
             <button class="md:hidden text-2xl"><i class="fas fa-bars-staggered"></i></button>
@@ -136,16 +127,16 @@
     <section id="home" class="min-h-screen flex items-center pt-20">
         <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
-                <h2 class="text-accent font-bold tracking-widest uppercase text-sm mb-4">Innovation & Strategy</h2>
-                <h1 class="text-6xl md:text-8xl font-extrabold leading-none mb-6">
-                    Digital <br> <span class="text-gradient">Domination.</span>
+                <h2 class="text-accent font-bold tracking-widest uppercase text-sm mb-4">Full-Stack Development & ERP</h2>
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+                    Next-Gen Web <br> <span class="text-gradient">Ecosystems.</span>
                 </h1>
                 <p class="text-gray-400 text-lg mb-10 max-w-md leading-relaxed">
-                    আমরা সাধারণ ওয়েবসাইট বানাই না, আমরা বানাই আপনার বিজনেসের ডিজিটাল পরিচয়। হাই-স্পিড, কাস্টম কোডিং এবং প্রিমিয়াম ইউজার এক্সপেরিয়েন্স।
+                    Laravel, CodeIgniter 4 এবং MERN Stack-এর শক্তিশালী সমন্বয়ে আমরা তৈরি করি হাই-পারফরম্যান্স এন্টারপ্রাইজ অ্যাপ্লিকেশন ও ডায়নামিক ওয়েব সলিউশন।
                 </p>
                 <div class="flex gap-4">
                     <a href="#contact" class="btn-neon px-8 py-4 rounded-2xl font-bold flex items-center">
-                        Work with Us <i class="fas fa-arrow-right ms-3 text-sm"></i>
+                        Explore Works <i class="fas fa-arrow-right ms-3 text-sm"></i>
                     </a>
                 </div>
             </div>
@@ -161,37 +152,37 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <div data-aos="fade-right">
-                    <h2 class="text-4xl font-bold mb-2">Our Digital <span style="color: var(--primary);">Craft</span></h2>
-                    <p class="text-gray-500">Premium solutions for high-end businesses.</p>
+                    <h2 class="text-4xl font-bold mb-2">Our Technology <span style="color: var(--primary);">Expertise</span></h2>
+                    <p class="text-gray-500">Scalable, secure, and modern engineering stacks.</p>
                 </div>
-                <div class="text-right d-none d-md-block" data-aos="fade-left">
-                    <span class="text-8xl font-bold opacity-5">SERVICES</span>
+                <div class="text-right hidden md:block" data-aos="fade-left">
+                    <span class="text-8xl font-bold opacity-5">STACKS</span>
                 </div>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="ultra-glass service-card p-10" data-aos="fade-up">
-                    <div class="w-14 h-14 rounded-2xl bg-green-900 bg-opacity-30 flex items-center justify-center text-2xl text-primary mb-8 border border-green-800">
-                        <i class="fas fa-terminal"></i>
+                    <div class="w-14 h-14 rounded-2xl bg-red-900 bg-opacity-30 flex items-center justify-center text-2xl text-red-500 mb-8 border border-red-800">
+                        <i class="fab fa-laravel"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Pure PHP Core</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">ভারী ফ্রেমওয়ার্ক ছাড়াই র PHP কোডিং-এ ওয়েবসাইট যা হবে সুপার ফাস্ট এবং ১০০% সিকিউর।</p>
+                    <h3 class="text-2xl font-bold mb-4">Laravel & CI4</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">উন্নত সিকিউরিটি, রোবাস্ট ব্যাকএন্ড এবং মডিউলার আর্কিটেকচারের মাধ্যমে জটিল সব স্কুল ম্যানেজমেন্ট ও বিজনেস ইআরপি সলিউশন।</p>
                 </div>
 
                 <div class="ultra-glass service-card p-10 border-b-4 border-orange-600" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 rounded-2xl bg-orange-900 bg-opacity-30 flex items-center justify-center text-2xl text-accent mb-8 border border-orange-800">
-                        <i class="fas fa-shapes"></i>
+                    <div class="w-14 h-14 rounded-2xl bg-blue-900 bg-opacity-30 flex items-center justify-center text-2xl text-blue-400 mb-8 border border-blue-800">
+                        <i class="fas fa-layer-group"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Custom Systems</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">স্কুল ম্যানেজমেন্ট থেকে ই-কমার্স—আপনার আইডিয়া অনুযায়ী একদম স্ক্র্যাচ থেকে তৈরি সিস্টেম।</p>
+                    <h3 class="text-2xl font-bold mb-4">MERN Stack</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">MongoDB, Express, React এবং Node.js এর মাধ্যমে রিয়েল-টাইম এবং সুপার-ফাস্ট সিঙ্গেল পেজ অ্যাপ্লিকেশন (SPA)।</p>
                 </div>
 
                 <div class="ultra-glass service-card p-10" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 rounded-2xl bg-yellow-900 bg-opacity-30 flex items-center justify-center text-2xl text-gold mb-8 border border-yellow-800">
-                        <i class="fas fa-layer-group"></i>
+                    <div class="w-14 h-14 rounded-2xl bg-green-900 bg-opacity-30 flex items-center justify-center text-2xl text-primary mb-8 border border-green-800">
+                        <i class="fas fa-bolt"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Ultra UX/UI</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed">বুটস্ট্র্যাপ ৫ এবং আধুনিক লাইব্রেরির সমন্বয়ে তৈরি ইন্টারফেস যা ইউজারকে আটকে রাখবে।</p>
+                    <h3 class="text-2xl font-bold mb-4">Custom & Core PHP</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">লাইটওয়েট ওয়েব ইউটিলিটি, লাইভ সার্চ এপিআই এবং কাস্টম স্ক্রিপ্ট ডেভেলপমেন্ট যা লাইটনিং ফাস্ট কাজ করে।</p>
                 </div>
             </div>
         </div>
@@ -207,21 +198,23 @@
                     </div>
                 </div>
                 <div class="md:w-2/3" data-aos="fade-left">
-                    <h4 class="text-gold font-bold uppercase tracking-widest text-xs mb-4">The Architect</h4>
+                    <h4 class="text-gold font-bold uppercase tracking-widest text-xs mb-4">Lead Developer & Architect</h4>
                     <h2 class="text-4xl font-bold mb-6">Milon Khondokar</h2>
                     <p class="text-gray-400 text-lg mb-8 italic">
-                        "আমি বিশ্বাস করি কোড হবে কবিতার মতো পরিষ্কার। তাই আপনার ড্রিম প্রজেক্টের প্রতিটি লাইন আমি নিজে অপ্টিমাইজ করি।"
+                        "কোডের পসরা সাজানো থেকে শুরু করে স্কেলেবল ডেটাবেজ আর্কিটেকচার—প্রতিটি প্রজেক্টে আধুনিক ফ্রেমওয়ার্ক ও বেস্ট প্র্যাকটিস নিশ্চিত করাই আমার মূল লক্ষ্য।"
                     </p>
                     <div class="flex flex-wrap gap-3">
-                        <span class="skill-tag">PHP Expert</span>
-                        <span class="skill-tag">Backend Logic</span>
-                        <span class="skill-tag">Nginx Config</span>
-                        <span class="skill-tag">Security Specialist</span>
-                        <span class="skill-tag">UI Designer</span>
+                        <span class="skill-tag">Laravel</span>
+                        <span class="skill-tag">CodeIgniter 4</span>
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Tailwind CSS</span>
                     </div>
                     <div class="mt-10 flex gap-10">
-                        <div><h5 class="text-3xl font-bold">500+</h5><p class="text-xs text-gray-500 uppercase">Deployed</p></div>
-                        <div><h5 class="text-3xl font-bold">100%</h5><p class="text-xs text-gray-500 uppercase">Custom Code</p></div>
+                        <div><h5 class="text-3xl font-bold">10+</h5><p class="text-xs text-gray-500 uppercase">Enterprise Systems</p></div>
+                        <div><h5 class="text-3xl font-bold">100%</h5><p class="text-xs text-gray-500 uppercase">Scalable Architecture</p></div>
                     </div>
                 </div>
             </div>
