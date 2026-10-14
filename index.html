@@ -1,240 +1,737 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MCA IT Lab | Professional Full-Stack Engineering & Development Team</title>
+    <title>MCA IT LAB | Enterprise Engineering & Full-Stack Development</title>
     
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Tailwind CSS & FontAwesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- AOS Animation CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@400;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandDark: '#000b16',
+                        brandNav: 'rgba(0, 11, 22, 0.85)',
+                        brandGreen: '#008037',
+                        brandGreenGlow: '#00b84f',
+                        brandOrange: '#ff5722',
+                        brandGold: '#ffd700',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        :root {
-            --bg-dark: #000c18;
-            --primary: #008037;
-            --accent: #ff5722;
-            --gold: #ffd700;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-        }
-
         body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--bg-dark);
+            background-color: #000b16;
             color: #ffffff;
             overflow-x: hidden;
         }
 
-        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
-
-        .mesh-bg {
+        /* Animated Ambient Mesh Background */
+        .ambient-mesh {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(0, 128, 55, 0.1) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(255, 87, 34, 0.08) 0%, transparent 40%);
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(0, 128, 55, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(255, 87, 34, 0.1) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
             z-index: -1;
+            pointer-events: none;
         }
 
-        .ultra-glass {
-            background: var(--glass);
+        /* Glassmorphism 3.0 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
         }
 
-        .btn-neon {
-            background: linear-gradient(45deg, var(--primary), #00a84a);
-            color: white;
-            box-shadow: 0 0 20px rgba(0, 128, 55, 0.4);
-            transition: 0.4s;
-            border: none;
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .btn-neon:hover {
-            box-shadow: 0 0 35px rgba(0, 128, 55, 0.7);
+        .glass-card-hover:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 215, 0, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Neon Glowing Buttons */
+        .btn-neon-primary {
+            background: linear-gradient(135deg, #008037, #00b84f);
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(0, 128, 55, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-neon-primary:hover {
+            box-shadow: 0 0 40px rgba(0, 184, 79, 0.7);
             transform: translateY(-3px);
         }
 
-        nav {
-            background: rgba(0, 12, 24, 0.85);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
+        /* Text Gradients */
+        .text-gold-gradient {
+            background: linear-gradient(to right, #ffffff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .text-gradient {
-            background: linear-gradient(to right, #ffffff, var(--gold));
+        .text-green-gradient {
+            background: linear-gradient(to right, #00b84f, #008037);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .service-card {
-            transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+        /* Custom Floating Keyframe */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
         }
-        .service-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: var(--gold);
-            transform: scale(1.02);
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
         }
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-            transition: 0.5s;
-        }
-        .service-card:hover::before { left: 100%; }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-        .img-float { animation: float 5s ease-in-out infinite; }
-
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            padding: 8px 20px;
-            border-radius: 100px;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-        .skill-tag:hover { background: var(--primary); border-color: var(--primary); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000b16; }
+        ::-webkit-scrollbar-thumb { background: #008037; border-radius: 4px; }
     </style>
 </head>
-<body>
+<body class="font-sans antialiased selection:bg-brandGreen selection:text-white">
 
-    <div class="mesh-bg"></div>
+    <!-- Background Ambient Glow -->
+    <div class="ambient-mesh"></div>
 
-    <nav class="fixed w-full z-50 py-4">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="#" class="text-2xl font-extrabold tracking-tighter">
-                <span style="color: var(--gold);">MCA</span> IT LAB
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 bg-brandNav backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGreen to-brandOrange flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:rotate-12 transition-transform">
+                    M
+                </div>
+                <span class="font-heading font-extrabold text-2xl tracking-tight text-white">
+                    MCA <span class="text-brandGold">IT LAB</span>
+                </span>
             </a>
-            <div class="hidden md:flex space-x-10 items-center">
-                <a href="#home" class="text-sm uppercase tracking-widest opacity-70 hover:opacity-100 transition">Overview</a>
-                <a href="#skills" class="text-sm uppercase tracking-widest opacity-70 hover:opacity-100 transition">Expertise</a>
-                <a href="#about" class="text-sm uppercase tracking-widest opacity-70 hover:opacity-100 transition">Lead Architect</a>
-                <a href="#contact" class="btn-neon px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Get in Touch</a>
+
+            <!-- Desktop Menu Links -->
+            <div class="hidden lg:flex items-center space-x-8 font-medium text-sm tracking-wider uppercase">
+                <a href="#about" class="text-gray-300 hover:text-brandGold transition-colors">Overview</a>
+                <a href="#stacks" class="text-gray-300 hover:text-brandGold transition-colors">Tech Stacks</a>
+                <a href="#services" class="text-gray-300 hover:text-brandGold transition-colors">Solutions</a>
+                <a href="#portfolio" class="text-gray-300 hover:text-brandGold transition-colors">Projects</a>
+                <a href="#estimator" class="text-gray-300 hover:text-brandGold transition-colors">Cost Estimator</a>
             </div>
-            <button class="md:hidden text-2xl"><i class="fas fa-bars-staggered"></i></button>
+
+            <!-- CTA Button -->
+            <div class="hidden lg:block">
+                <a href="#contact" class="btn-neon-primary px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                    <i class="fab fa-whatsapp text-lg"></i> Let's Talk
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobile-menu-btn" class="lg:hidden text-2xl text-white focus:outline-none">
+                <i class="fas fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Overlay -->
+        <div id="mobile-drawer" class="fixed inset-0 bg-brandDark/95 backdrop-blur-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-8 lg:hidden">
+            <div>
+                <div class="flex justify-between items-center mb-10">
+                    <a href="#" class="font-heading font-bold text-2xl">
+                        MCA <span class="text-brandGold">IT LAB</span>
+                    </a>
+                    <button id="close-drawer-btn" class="text-2xl text-gray-400 hover:text-white">
+                        <i class="fas fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="flex flex-col space-y-6 text-lg font-semibold tracking-wide uppercase">
+                    <a href="#about" class="mobile-nav-link text-gray-300 hover:text-brandGold">Overview</a>
+                    <a href="#stacks" class="mobile-nav-link text-gray-300 hover:text-brandGold">Tech Stacks</a>
+                    <a href="#services" class="mobile-nav-link text-gray-300 hover:text-brandGold">Solutions</a>
+                    <a href="#portfolio" class="mobile-nav-link text-gray-300 hover:text-brandGold">Projects</a>
+                    <a href="#estimator" class="mobile-nav-link text-gray-300 hover:text-brandGold">Cost Estimator</a>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10">
+                <a href="https://wa.me/8801927784016" class="btn-neon-primary w-full py-3 rounded-xl text-center font-bold uppercase text-sm block">
+                    Contact via WhatsApp
+                </a>
+            </div>
         </div>
     </nav>
 
-    <section id="home" class="min-h-screen flex items-center pt-20">
-        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-            <div data-aos="fade-right">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full ultra-glass mb-6">
-                    <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="text-xs uppercase tracking-widest text-gray-300 font-semibold">Available for Complex Projects</span>
+    <!-- HERO SECTION -->
+    <section id="about" class="min-h-screen flex items-center pt-28 pb-16 relative">
+        <div class="container mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7" data-aos="fade-right">
+                <!-- Status Badge -->
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-card mb-6 border border-brandGreen/40">
+                    <span class="w-3 h-3 rounded-full bg-brandGreenGlow animate-ping"></span>
+                    <span class="text-xs uppercase tracking-widest text-gray-200 font-semibold">Architecture • Full-Stack • Engineering</span>
                 </div>
-                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
-                    Engineering Excellence <br> <span class="text-gradient">Without Limits.</span>
+
+                <h1 class="font-heading text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+                    Architecting <br>
+                    <span class="text-gold-gradient">High-Performance</span> <br>
+                    Digital Systems.
                 </h1>
-                <p class="text-gray-400 text-lg mb-10 max-w-lg leading-relaxed">
-                    আমরা এবং আমাদের ডেডিকেটেড টিম আধুনিক ওয়েব টেকনোলজি যেমন Laravel, CodeIgniter 4, MERN Stack এবং Pure PHP ব্যবহার করে তৈরি করছি হাই-পারফরম্যান্স এন্টারপ্রাইজ সিস্টেম ও ওয়েব অ্যাপ্লিকেশন।
+
+                <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl leading-relaxed">
+                    আমরা এবং আমাদের ডেডিকেটেড টিম আধুনিক ওয়েব ফ্রেমওয়ার্ক **Laravel, CodeIgniter 4, Pure PHP** এবং **MERN Stack** দিয়ে তৈরি করছি বড় আকারের ইআরপি (ERP), রিয়েল-টাইম প্ল্যাটফর্ম এবং ক্লায়েন্ট-সাইড ওয়েব ইউটিলিটি টুলস।
                 </p>
-                <div class="flex gap-4 flex-wrap">
-                    <a href="#skills" class="btn-neon px-8 py-4 rounded-2xl font-bold flex items-center">
-                        Explore Our Tech Stack <i class="fas fa-arrow-right ms-3 text-sm"></i>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap gap-4 items-center">
+                    <a href="#portfolio" class="btn-neon-primary px-8 py-4 rounded-2xl font-bold uppercase text-xs tracking-wider flex items-center gap-3">
+                        View Ecosystems <i class="fas fa-arrow-down"></i>
+                    </a>
+                    <a href="#estimator" class="px-8 py-4 rounded-2xl glass-card font-bold uppercase text-xs tracking-wider text-gray-300 hover:text-white hover:border-brandGold transition-all">
+                        Estimate Project Cost
                     </a>
                 </div>
+
+                <!-- Stats Counters Grid -->
+                <div class="grid grid-cols-3 gap-6 mt-14 pt-10 border-t border-white/10">
+                    <div>
+                        <h4 class="font-heading text-3xl md:text-4xl font-extrabold text-brandGold">10+</h4>
+                        <p class="text-xs uppercase text-gray-400 tracking-wider mt-1">Enterprise Systems</p>
+                    </div>
+                    <div>
+                        <h4 class="font-heading text-3xl md:text-4xl font-extrabold text-brandGreenGlow">100%</h4>
+                        <p class="text-xs uppercase text-gray-400 tracking-wider mt-1">Custom Architecture</p>
+                    </div>
+                    <div>
+                        <h4 class="font-heading text-3xl md:text-4xl font-extrabold text-brandOrange">99.9%</h4>
+                        <p class="text-xs uppercase text-gray-400 tracking-wider mt-1">Optimization Standard</p>
+                    </div>
+                </div>
             </div>
-            <div class="relative flex justify-center" data-aos="zoom-in">
-                <div class="ultra-glass p-6 img-float">
-                    <img src="mca.png" alt="MCA Hero" class="rounded-2xl shadow-2xl w-full max-w-md border border-white border-opacity-10">
+
+            <!-- Hero Image Visual Card -->
+            <div class="lg:col-span-5 flex justify-center" data-aos="zoom-in">
+                <div class="relative w-full max-w-md">
+                    <!-- Glow Behind Image -->
+                    <div class="absolute -inset-4 bg-gradient-to-r from-brandGreen via-brandOrange to-brandGold rounded-3xl opacity-25 blur-2xl animate-pulse"></div>
+                    
+                    <div class="glass-card p-4 relative animate-float">
+                        <img src="mca.png" alt="MCA IT Lab Visual" class="rounded-2xl w-full border border-white/10 object-cover shadow-2xl">
+                        
+                        <!-- Floating Tech Pills -->
+                        <div class="absolute -bottom-6 -left-6 glass-card px-5 py-3 flex items-center gap-3 border border-brandGreen/40 shadow-xl">
+                            <i class="fab fa-laravel text-red-500 text-2xl"></i>
+                            <div>
+                                <p class="text-xs font-bold">Laravel & CI4</p>
+                                <p class="text-[10px] text-gray-400">Enterprise Backend</p>
+                            </div>
+                        </div>
+
+                        <div class="absolute -top-6 -right-6 glass-card px-5 py-3 flex items-center gap-3 border border-brandGold/40 shadow-xl">
+                            <i class="fab fa-react text-blue-400 text-2xl"></i>
+                            <div>
+                                <p class="text-xs font-bold">MERN Ecosystem</p>
+                                <p class="text-[10px] text-gray-400">Reactive Interfaces</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTERACTIVE TECH STACK SECTION -->
+    <section id="stacks" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-4">
+                    Our Specialized <span class="text-brandGreenGlow">Tech Stack</span>
+                </h2>
+                <p class="text-gray-400">
+                    আমরা এবং আমাদের টিম নির্দিষ্ট যেসকল শক্তিশালী ল্যাঙ্গুয়েজ, ফ্রেমওয়ার্ক ও টুলস দিয়ে জটিল সমস্যা সমাধান করি:
+                </p>
+            </div>
+
+            <!-- Tech Tabs Control -->
+            <div class="flex justify-center mb-12 gap-2 md:gap-4 flex-wrap" data-aos="fade-up">
+                <button onclick="switchTechTab('php')" id="tab-btn-php" class="tech-tab-btn px-6 py-3 rounded-xl font-semibold text-xs md:text-sm uppercase tracking-wider glass-card border-brandGreen text-white transition-all">
+                    PHP & Frameworks
+                </button>
+                <button onclick="switchTechTab('mern')" id="tab-btn-mern" class="tech-tab-btn px-6 py-3 rounded-xl font-semibold text-xs md:text-sm uppercase tracking-wider glass-card text-gray-400 hover:text-white transition-all">
+                    MERN & JS Engine
+                </button>
+                <button onclick="switchTechTab('frontend')" id="tab-btn-frontend" class="tech-tab-btn px-6 py-3 rounded-xl font-semibold text-xs md:text-sm uppercase tracking-wider glass-card text-gray-400 hover:text-white transition-all">
+                    UI Frameworks & DB
+                </button>
+            </div>
+
+            <!-- Tech Tab Contents -->
+            <div id="tech-content-area">
+                <!-- PHP Tab (Default) -->
+                <div id="tech-php" class="grid md:grid-cols-3 gap-8" data-aos="fade-up">
+                    <div class="glass-card p-8 glass-card-hover">
+                        <div class="w-14 h-14 rounded-2xl bg-red-900/30 border border-red-500/30 flex items-center justify-center text-3xl text-red-500 mb-6">
+                            <i class="fab fa-laravel"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-3">Laravel Framework</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            এন্টারপ্রাইজ লেভেল সিকিউরিটি, ORM আর্কিটেকচার এবং স্কেলেবল ব্যাকএন্ড APIs তৈরির জন্য আমাদের টিমের প্রধান পছন্দ।
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">Eloquent</span>
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">REST APIs</span>
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">Queues</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-8 glass-card-hover">
+                        <div class="w-14 h-14 rounded-2xl bg-orange-900/30 border border-orange-500/30 flex items-center justify-center text-3xl text-orange-500 mb-6">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-3">CodeIgniter 4</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            আল্ট্রা-ফাস্ট এক্সিকিউশন ও কম ওভারহেডের জন্য তৈরি। আমাদের স্কুল ম্যানেজমেন্ট ইআরপি (MCA Campus Pro) এই সিআই ৪ দিয়েই প্রস্তুত।
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">High Speed</span>
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">Routing</span>
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">MVC Architecture</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-8 glass-card-hover">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-900/30 border border-blue-500/30 flex items-center justify-center text-3xl text-blue-400 mb-6">
+                            <i class="fab fa-php"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-3">Pure PHP Core</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            কোনো বাইরের ফ্রেমওয়ার্ক ছাড়াই সরাসরি র' PHP কোডিং ব্যবহার করে আমরা অতি দ্রুতগতির কাস্টম ইউটিলিটি টুলস ডাইনামিক করি।
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">Custom Logic</span>
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">Zero Dependency</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MERN Tab (Hidden initially) -->
+                <div id="tech-mern" class="grid md:grid-cols-3 gap-8 hidden">
+                    <div class="glass-card p-8 glass-card-hover">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-900/30 border border-blue-500/30 flex items-center justify-center text-3xl text-blue-400 mb-6">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-3">React.js Frontend</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            কম্পোনেন্ট ভিত্তিক রেসপন্সিভ সিঙ্গেল পেজ অ্যাপ্লিকেশন (SPA) ও ডায়নামিক স্টেট ম্যানেজমেন্টের জন্য ব্যবহৃত হয়।
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">Hooks</span>
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">Redux Toolkit</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-8 glass-card-hover">
+                        <div class="w-14 h-14 rounded-2xl bg-green-900/30 border border-green-500/30 flex items-center justify-center text-3xl text-green-500 mb-6">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-3">Node.js & Express</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            ইভেন্ট-ড্রিভেন এবং নন-ব্লকিং ব্যাকএন্ড আর্কিটেকচার যা অতি দ্রুত ডেটা প্রসেসিংয়ে সক্ষম।
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">Async I/O</span>
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">REST Microservices</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-8 glass-card-hover">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-900/30 border border-emerald-500/30 flex items-center justify-center text-3xl text-emerald-400 mb-6">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-3">MongoDB NoSQL</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            আনস্ট্রাকচার্ড এবং হাই-ভলিউম রিয়েল-টাইম ডাটাবেজ প্রসেস করতে ফ্লেক্সিবল স্কিমা ভিত্তিক নো-এসকিউএল সলিউশন।
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">Mongoose</span>
+                            <span class="text-xs bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300">Aggregation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend & Tools Tab (Hidden initially) -->
+                <div id="tech-frontend" class="grid md:grid-cols-3 gap-8 hidden">
+                    <div class="glass-card p-8 glass-card-hover">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-900/30 border border-cyan-500/30 flex items-center justify-center text-3xl text-cyan-400 mb-6">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-3">Tailwind & Bootstrap 5</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            যেকোনো স্ক্রিন সাইজে নিখুঁত পিক্সেল-পারফেক্ট এবং চোখের প্রশান্তিদায়ক ইউআই/ইউএক্স নিশ্চিতকরণ।
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 glass-card-hover">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-900/30 border border-indigo-500/30 flex items-center justify-center text-3xl text-indigo-400 mb-6">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-3">MySQL Database</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            জটিল রিলেশনাল ডেটাবেজ ডিজাইন, কুয়েরি অপ্টিমাইজেশন ও ইনডেক্সিংয়ে বিশেষজ্ঞ।
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-8 glass-card-hover">
+                        <div class="w-14 h-14 rounded-2xl bg-purple-900/30 border border-purple-500/30 flex items-center justify-center text-3xl text-purple-400 mb-6">
+                            <i class="fas fa-screwdriver-wrench"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold mb-3">DevOps & Utilities</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Nginx, cPanel Deployment, Git Version Control, এবং Client-Side Image/PDF Manipulation Tools.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="py-32">
+    <!-- SOLUTIONS & SERVICES SECTION -->
+    <section id="services" class="py-24 relative bg-black/40">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                <div data-aos="fade-right">
-                    <h2 class="text-4xl font-bold mb-2">Our Core <span style="color: var(--primary);">Capabilities</span></h2>
-                    <p class="text-gray-400">যে টেকনোলজিগুলোতে আমাদের এবং আমাদের টিমের গভীর পারদর্শিতা রয়েছে:</p>
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6" data-aos="fade-right">
+                <div>
+                    <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-3">
+                        Engineering <span class="text-brandGold">Solutions</span>
+                    </h2>
+                    <p class="text-gray-400">যেসব বিজনেস সলিউশন আমরা সফলতার সাথে ডেলিভার করি:</p>
                 </div>
-                <div class="text-right hidden md:block" data-aos="fade-left">
-                    <span class="text-8xl font-bold opacity-5">SKILLS</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="glass-card p-8 glass-card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 rounded-xl bg-brandGreen/20 border border-brandGreen flex items-center justify-center text-2xl text-brandGreenGlow mb-6">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3">School ERP Systems</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        স্টুডেন্ট ম্যানেজমেন্ট, অটোমেটিক রেজাল্ট প্রসেসিং, ট্রান্সফার সার্টিফিকেট (TC) জেনারেশন, ফি কালেকশন ও এসএমএস সিস্টেম।
+                    </p>
                 </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card p-8 glass-card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 rounded-xl bg-brandOrange/20 border border-brandOrange flex items-center justify-center text-2xl text-brandOrange mb-6">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3">News & EdTech Portals</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        এডুকেশন নিউজ সাইট, ক্যাটাগরি ফিল্টারিং, অটোমেটিক আরএসএস ফিড, লাইভ সার্চ এপিআই এবং ইনস্ট্যান্ট পেজ লোড স্পিড।
+                    </p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card p-8 glass-card-hover" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 rounded-xl bg-brandGold/20 border border-brandGold flex items-center justify-center text-2xl text-brandGold mb-6">
+                        <i class="fas fa-gears"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3">Client-Side Web Tools</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        অনলাইন পিডিএফ এডিটর, ইমেজ কমপ্রেসর, ওয়াটারমার্ক এবং ওসিআর (OCR) ভিত্তিক ক্লায়েন্ট-সাইড ওয়েব ইউটিলিটি সলিউশন।
+                    </p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-card p-8 glass-card-hover" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/20 border border-blue-500 flex items-center justify-center text-2xl text-blue-400 mb-6">
+                        <i class="fas fa-code-merge"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold mb-3">API Integration & ERP</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        থার্ড পার্টি পেমেন্ট গেটওয়ে ইন্টিগ্রেশন, কাস্টম ব্যাকএন্ড এপিআই ডেভেলপমেন্ট এবং বিদ্যমান সিস্টেমের পারফরম্যান্স অপ্টিমাইজেশন।
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO / SHOWCASE SECTION -->
+    <section id="portfolio" class="py-24 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-4">
+                    Featured <span class="text-brandGreenGlow">Ecosystems</span>
+                </h2>
+                <p class="text-gray-400">আমাদের তৈরি কিছু জনপ্রিয় এবং সার্বক্ষণিক পরিচালিত লাইভ প্রজেক্ট:</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="ultra-glass service-card p-10" data-aos="fade-up">
-                    <div class="w-14 h-14 rounded-2xl bg-red-900 bg-opacity-30 flex items-center justify-center text-2xl text-red-500 mb-8 border border-red-800">
-                        <i class="fab fa-laravel"></i>
+                <!-- Project 1 -->
+                <div class="glass-card overflow-hidden glass-card-hover" data-aos="fade-up">
+                    <div class="h-48 bg-gradient-to-br from-brandGreen/40 to-brandDark p-6 flex flex-col justify-between border-b border-white/10 relative">
+                        <span class="text-xs uppercase font-bold tracking-widest bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-brandGold w-max">CodeIgniter 4</span>
+                        <h3 class="font-heading text-2xl font-bold text-white">MCA Campus Pro</h3>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Laravel & CI4</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">কোডইগনিটার ৪ এবং লারাভেল ফ্রেমওয়ার্ক ব্যবহার করে আমরা জটিল স্কুল ম্যানেজমেন্ট ইআরপি, নিউজ পোর্টাল এবং ব্যাকএন্ড সিস্টেম সুচারুভাবে পরিচালনা করি।</p>
+                    <div class="p-6">
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            সম্পূর্ণ অটোমেটেড স্কুল ম্যানেজমেন্ট সফটওয়্যার। অটো টিসি জেনারেশন, রেজাল্ট প্রসেসিং ও অনলাইন ফি কালেকশন মডিউল সমৃদ্ধ।
+                        </p>
+                        <a href="https://app.pathghar.com" target="_blank" class="text-brandGreenGlow font-bold text-xs uppercase tracking-wider flex items-center gap-2 hover:underline">
+                            Visit System <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="ultra-glass service-card p-10 border-b-4 border-orange-600" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 rounded-2xl bg-blue-900 bg-opacity-30 flex items-center justify-center text-2xl text-blue-400 mb-8 border border-blue-800">
-                        <i class="fas fa-layer-group"></i>
+                <!-- Project 2 -->
+                <div class="glass-card overflow-hidden glass-card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 bg-gradient-to-br from-brandOrange/40 to-brandDark p-6 flex flex-col justify-between border-b border-white/10 relative">
+                        <span class="text-xs uppercase font-bold tracking-widest bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-brandOrange w-max">EdTech Portal</span>
+                        <h3 class="font-heading text-2xl font-bold text-white">Pathghar.com</h3>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">MERN Stack</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">MongoDB, Express.js, React.js এবং Node.js এর সমন্বয়ে আধুনিক ও রিয়েল-টাইম ইন্টারেক্টিভ সিঙ্গেল পেজ অ্যাপ্লিকেশন তৈরিতে আমরা সিদ্ধহস্ত।</p>
+                    <div class="p-6">
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            জাতীয় শিক্ষা সংবাদ মাধ্যম ও তথ্য পোর্টাল। রিয়েল-টাইম সার্চ, পোলিং সিস্টেম ও ডাইনামিক ক্যাটাগরি ম্যানেজমেন্ট সহ।
+                        </p>
+                        <a href="https://pathghar.com" target="_blank" class="text-brandOrange font-bold text-xs uppercase tracking-wider flex items-center gap-2 hover:underline">
+                            Visit Portal <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="ultra-glass service-card p-10" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 rounded-2xl bg-green-900 bg-opacity-30 flex items-center justify-center text-2xl text-primary mb-8 border border-green-800">
-                        <i class="fas fa-terminal"></i>
+                <!-- Project 3 -->
+                <div class="glass-card overflow-hidden glass-card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 bg-gradient-to-br from-blue-600/40 to-brandDark p-6 flex flex-col justify-between border-b border-white/10 relative">
+                        <span class="text-xs uppercase font-bold tracking-widest bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-blue-400 w-max">Web Utility</span>
+                        <h3 class="font-heading text-2xl font-bold text-white">PicLabz.com</h3>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Pure PHP & Custom Logic</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">ভারী ফ্রেমওয়ার্ক ছাড়াও র' (Pure) PHP দিয়ে কাস্টম স্ক্রিপ্টিং, অপ্টিমাইজড ডেটাবেজ কুয়েরি এবং লাইটওয়েট ইউটিলিটি টুলস তৈরি করতে আমরা পটু।</p>
+                    <div class="p-6">
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                            অনলাইন ওয়েব ইউটিলিটি প্ল্যাটফর্ম। পিএইচপি ও ক্লায়েন্ট-সাইড প্রসেসিং ব্যবহার করে ইমেজ এবং পিডিএফ কনভার্সন সিস্টেম।
+                        </p>
+                        <a href="https://piclabz.com" target="_blank" class="text-blue-400 font-bold text-xs uppercase tracking-wider flex items-center gap-2 hover:underline">
+                            Visit Utility <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-24 relative overflow-hidden">
+    <!-- LEAD ARCHITECT PROFILE -->
+    <section class="py-24 relative">
         <div class="container mx-auto px-6">
-            <div class="ultra-glass p-8 md:p-16 flex flex-col md:flex-row items-center gap-16">
-                <div class="md:w-1/3" data-aos="fade-right">
-                    <div class="relative">
-                        <div class="absolute -inset-2 bg-gradient-to-r from-green-500 to-orange-500 rounded-3xl blur opacity-30"></div>
-                        <img src="milon.jpg" alt="Milon Khondokar" class="relative rounded-2xl w-full border border-white border-opacity-10 grayscale hover:grayscale-0 transition duration-500">
+            <div class="glass-card p-8 md:p-16 relative overflow-hidden" data-aos="fade-up">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-4 flex justify-center">
+                        <div class="relative w-full max-w-xs">
+                            <div class="absolute -inset-2 bg-gradient-to-r from-brandGreen to-brandOrange rounded-3xl blur opacity-30"></div>
+                            <img src="milon.jpg" alt="Milon Khondokar" class="relative rounded-2xl w-full border border-white/10 grayscale hover:grayscale-0 transition duration-500 shadow-2xl">
+                        </div>
                     </div>
-                </div>
-                <div class="md:w-2/3" data-aos="fade-left">
-                    <h4 class="text-gold font-bold uppercase tracking-widest text-xs mb-4">Lead Developer & Team Lead</h4>
-                    <h2 class="text-4xl font-bold mb-6">Milon Khondokar</h2>
-                    <p class="text-gray-300 text-lg mb-8 italic leading-relaxed">
-                        "আমাদের টিম বিশ্বাস করে কোড হবে নিখুঁত এবং কার্যোপযোগী। র' পিএইচপি থেকে শুরু করে আধুনিক ফ্রেমওয়ার্ক বা ফুল-স্ট্যাক এমইআরএন—প্রতিটি প্রজেক্টে আমরা সর্বোচ্চ কোয়ালিটি এবং সিকিউরিটি নিশ্চিত করি।"
-                    </p>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="skill-tag">Laravel</span>
-                        <span class="skill-tag">CodeIgniter 4</span>
-                        <span class="skill-tag">Pure PHP</span>
-                        <span class="skill-tag">MERN Stack</span>
-                        <span class="skill-tag">MySQL / MongoDB</span>
-                        <span class="skill-tag">Tailwind CSS</span>
-                        <span class="skill-tag">System Architecture</span>
+                    <div class="lg:col-span-8">
+                        <span class="text-brandGold font-bold uppercase tracking-widest text-xs mb-2 block">Lead Architect & Team Lead</span>
+                        <h2 class="font-heading text-4xl font-extrabold mb-6">Milon Khondokar</h2>
+                        <p class="text-gray-300 text-lg mb-8 italic leading-relaxed">
+                            "আমি এবং আমার ডেভেলপমেন্ট টিম বিশ্বাস করি কোড হবে কবিতার মতো পরিচ্ছন্ন এবং অত্যন্ত কার্যকর। র' পিএইচপি থেকে শুরু করে আধুনিক ফ্রেমওয়ার্ক (Laravel, CI4) কিংবা MERN Stack—প্রতিটি লাইনে সেরা সিকিউরিটি ও পারফরম্যান্স নিশ্চিত করা আমাদের অভ্যাস।"
+                        </p>
+
+                        <div class="flex flex-wrap gap-2 mb-8">
+                            <span class="bg-white/5 border border-white/10 px-4 py-2 rounded-full text-xs font-semibold">System Engineering</span>
+                            <span class="bg-white/5 border border-white/10 px-4 py-2 rounded-full text-xs font-semibold">CodeIgniter 4 Specialist</span>
+                            <span class="bg-white/5 border border-white/10 px-4 py-2 rounded-full text-xs font-semibold">Laravel Architect</span>
+                            <span class="bg-white/5 border border-white/10 px-4 py-2 rounded-full text-xs font-semibold">MERN Full-Stack</span>
+                            <span class="bg-white/5 border border-white/10 px-4 py-2 rounded-full text-xs font-semibold">Database Optimization</span>
+                        </div>
+
+                        <div class="flex gap-8 border-t border-white/10 pt-6">
+                            <div>
+                                <p class="text-2xl font-bold font-heading text-brandGreenGlow">500+</p>
+                                <p class="text-xs uppercase text-gray-400">Deployed Modules</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-bold font-heading text-brandGold">100%</p>
+                                <p class="text-xs uppercase text-gray-400">Clean Architecture</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact" class="py-20 border-t border-white border-opacity-5">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-4">Let's Build Something <span class="text-accent">Awesome</span> Together.</h2>
-            <p class="text-gray-400 mb-8 max-w-md mx-auto">আপনার যেকোনো প্রযুক্তিগত আইডিয়া বা প্রজেক্ট নিয়ে আমাদের সাথে সরাসরি যোগাযোগ করতে পারেন।</p>
-            <div class="flex justify-center gap-6 mb-12">
-                <a href="https://wa.me/8801927784016" class="text-3xl hover:text-primary transition"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:contact.milon@yahoo.com" class="text-3xl hover:text-accent transition"><i class="far fa-envelope"></i></a>
+    <!-- INTERACTIVE PROJECT COST ESTIMATOR -->
+    <section id="estimator" class="py-24 relative bg-black/30">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto glass-card p-8 md:p-12" data-aos="fade-up">
+                <div class="text-center mb-10">
+                    <h2 class="font-heading text-3xl md:text-4xl font-extrabold mb-3">
+                        Project <span class="text-brandGold">Estimator</span> Calculator
+                    </h2>
+                    <p class="text-gray-400 text-sm">আপনার প্রয়োজনীয় সার্ভিসগুলো বেছে নিন এবং আনুমানিক একটি খরচের হিসাব পেয়ে যান:</p>
+                </div>
+
+                <form id="calculator-form" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-3 text-gray-300">Project Type:</label>
+                        <select id="project-type" class="w-full bg-brandDark/80 border border-white/10 rounded-xl p-4 text-sm text-gray-200 focus:border-brandGreen focus:outline-none">
+                            <option value="5000">School / College ERP (Custom)</option>
+                            <option value="3000">EdTech / News Portal</option>
+                            <option value="4000">MERN Web Application</option>
+                            <option value="2500">Custom Web Utility / Tool</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold mb-3 text-gray-300">Technology Choice:</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <label class="glass-card p-3 rounded-xl flex items-center gap-2 cursor-pointer border-white/10">
+                                <input type="checkbox" value="1000" class="tech-addon" checked>
+                                <span class="text-xs">Laravel / CI4</span>
+                            </label>
+                            <label class="glass-card p-3 rounded-xl flex items-center gap-2 cursor-pointer border-white/10">
+                                <input type="checkbox" value="1500" class="tech-addon">
+                                <span class="text-xs">React / MERN</span>
+                            </label>
+                            <label class="glass-card p-3 rounded-xl flex items-center gap-2 cursor-pointer border-white/10">
+                                <input type="checkbox" value="800" class="tech-addon">
+                                <span class="text-xs">SMS / Gateway API</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-brandDark/90 rounded-2xl border border-white/10 flex justify-between items-center mt-8">
+                        <div>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider">Estimated Starting Budget</p>
+                            <h3 id="estimated-price" class="font-heading text-3xl font-extrabold text-brandGreenGlow">৳ 6,000 BDT</h3>
+                        </div>
+                        <button type="button" onclick="sendWhatsAppEstimate()" class="btn-neon-primary px-6 py-3 rounded-xl font-bold text-xs uppercase flex items-center gap-2">
+                            <i class="fab fa-whatsapp text-base"></i> Send Estimate
+                        </button>
+                    </div>
+                </form>
             </div>
-            <p class="text-gray-600 text-sm tracking-widest uppercase">MCA IT LAB &copy; 2026 | Gangni, Bangladesh</p>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer id="contact" class="py-20 border-t border-white/10 relative">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="font-heading text-4xl font-extrabold mb-4">
+                Let's Build the <span class="text-brandOrange">Future</span> Together.
+            </h2>
+            <p class="text-gray-400 mb-10 max-w-lg mx-auto">
+                আপনার স্কুলের সফটওয়্যার, বিজনেস ইআরপি বা কোনো কাস্টম প্রজেক্ট শুরু করার জন্য সরাসরি হোয়াটসঅ্যাপ বা ইমেইলে যোগাযোগ করুন।
+            </p>
+
+            <div class="flex justify-center gap-6 mb-12">
+                <a href="https://wa.me/8801927784016" target="_blank" class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-2xl text-brandGreenGlow hover:border-brandGreen transition-all hover:scale-110">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:contact.milon@yahoo.com" class="w-14 h-14 rounded-2xl glass-card flex items-center justify-center text-2xl text-brandOrange hover:border-brandOrange transition-all hover:scale-110">
+                    <i class="far fa-envelope"></i>
+                </a>
+            </div>
+
+            <p class="text-gray-600 text-xs uppercase tracking-widest">
+                MCA IT LAB &copy; 2026 | Gangni, Meherpur, Bangladesh
+            </p>
         </div>
     </footer>
 
+    <!-- AOS Animation Library JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JavaScript Logic -->
     <script>
-        AOS.init({ duration: 1000, once: true });
+        // Init AOS
+        AOS.init({ duration: 900, once: true });
+
+        // Mobile Menu Drawer Control
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeDrawerBtn = document.getElementById('close-drawer-btn');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.remove('translate-x-full');
+        });
+
+        closeDrawerBtn.addEventListener('click', () => {
+            mobileDrawer.classList.add('translate-x-full');
+        });
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.add('translate-x-full');
+            });
+        });
+
+        // Tech Tabs Switching Logic
+        function switchTechTab(tabName) {
+            const tabs = ['php', 'mern', 'frontend'];
+            tabs.forEach(t => {
+                const content = document.getElementById(`tech-${t}`);
+                const btn = document.getElementById(`tab-btn-${t}`);
+                
+                if (t === tabName) {
+                    content.classList.remove('hidden');
+                    btn.classList.add('border-brandGreen', 'text-white');
+                    btn.classList.remove('text-gray-400');
+                } else {
+                    content.classList.add('hidden');
+                    btn.classList.remove('border-brandGreen', 'text-white');
+                    btn.classList.add('text-gray-400');
+                }
+            });
+        }
+
+        // Project Cost Calculator Logic
+        const projectTypeSelect = document.getElementById('project-type');
+        const techAddons = document.querySelectorAll('.tech-addon');
+        const estimatedPriceEl = document.getElementById('estimated-price');
+
+        function updatePrice() {
+            let base = parseInt(projectTypeSelect.value);
+            techAddons.forEach(addon => {
+                if (addon.checked) {
+                    base += parseInt(addon.value);
+                }
+            });
+            estimatedPriceEl.innerText = `৳ ${base.toLocaleString('en-US')} BDT`;
+        }
+
+        projectTypeSelect.addEventListener('change', updatePrice);
+        techAddons.forEach(addon => addon.addEventListener('change', updatePrice));
+
+        function sendWhatsAppEstimate() {
+            const price = estimatedPriceEl.innerText;
+            const projectText = projectTypeSelect.options[projectTypeSelect.selectedIndex].text;
+            const msg = `Hello MCA IT LAB, I calculated an estimate on your website for "${projectText}" with total around ${price}. I want to discuss details.`;
+            window.open(`https://wa.me/8801927784016?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // Run initial price calculation
+        updatePrice();
     </script>
 </body>
 </html>
